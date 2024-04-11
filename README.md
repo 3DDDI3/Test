@@ -18,7 +18,7 @@
     create database laravel character set utf8 collate utf8_general_ci;
     exit;
    ```
-5. Загрузить папку vendo:
+5. Загрузить папку vendor:
    ```console
       docker-compose run --rm composer install
    ```
@@ -41,7 +41,7 @@
    ```
 9. Запустить миграции:
    ```console
-      docker-compose run --rm artisan mmigrate
+      docker-compose run --rm artisan migrate
    ```
 10. Создать символические ссылки
    ```console
