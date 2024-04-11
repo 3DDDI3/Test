@@ -31,7 +31,6 @@ $(function () {
             data: formData,
             dataType: "html",
             success: function (response) {
-                console.log(response);
                 $(".table tbody").append(response);
             }
         });
