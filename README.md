@@ -1,24 +1,28 @@
 ### Инструкция для развертывания ###
 
 Для корректной работы необходимо выполнить следующие шаги:
-1. Создать пользователя для mysql:
+1. Запустить `docker контейнер`:
+   ```console
+      docker-compose up -d
+   ```
+3. Создать пользователя для mysql:
    ```console
      docker-compose exec -it mysql mysql -u root -p'root'
      grant all privileges on *.* to 'laravel'@'%';
      flush privileges;
      exit;
    ```
-2. Создать базу:
+4. Создать базу:
    ```console
     docker-compose exec -it mysql mysql -u root -p'root'
     create database laravel character set utf8 collate utf8_general_ci;
     exit;
    ```
-3. Загрузить папку vendo:
+5. Загрузить папку vendo:
    ```console
       docker-compose run --rm composer install
    ```
-4. Копировать файл `.env.example`, изменив его название на `.env` и изменив в нем подключение к бд:
+6. Копировать файл `.env.example`, изменив его название на `.env` и изменив в нем подключение к бд:
    ```env
       DB_CONNECTION=mysql
       DB_HOST=mysql
@@ -27,19 +31,19 @@
       DB_USERNAME=laravel
       DB_PASSWORD=laravel
    ```
-5. Генерация ключа приложения
+7. Генерация ключа приложения
    ```console
       docker-compose run --rm artisan key:generate
    ```
-6. Изменить права доступа:
+8. Изменить права доступа:
    ```console
       docker-compose exec -it php chmod -R 777 .
    ```
-7. Запустить миграции:
+9. Запустить миграции:
    ```console
       docker-compose run --rm artisan mmigrate
    ```
-8. Создать символические ссылки
+10. Создать символические ссылки
    ```console
       docker-compose run --rm artisan storage:link
    ```
