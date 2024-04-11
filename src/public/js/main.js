@@ -8,6 +8,7 @@ $(function () {
   $("input[name='inputFile']").change(function (e) {
     var _this = this;
     e.preventDefault();
+    if ($(".input-file-list").children().length > 0) $(".input-file-list div").empty();
     if ($(this).get(0).files.length > 5) {
       alert("Выбрано больше 5 файлов");
       return;
@@ -34,11 +35,12 @@ $(function () {
       data: formData,
       dataType: "html",
       success: function success(response) {
+        console.log(response);
         $(".table tbody").append(response);
       }
     });
   });
-  $("tr td:not(:last-child)").click(function (e) {
+  $("tbody").on("click", "tr td:not(:last-child)", function (e) {
     e.preventDefault();
     location.href = "/#openModal";
     var id = $(this).parent().children()[0].getAttribute("data-id");
@@ -52,7 +54,7 @@ $(function () {
       }
     });
   });
-  $(".zip-icon").click(function (e) {
+  $("tbody").on("click", "tr td svg.zip-icon", function (e) {
     e.preventDefault();
     var id = $(this).closest("tr").children()[0].getAttribute("data-id");
     $.ajax({

@@ -86,7 +86,7 @@ class ImageController extends Controller
 
                 sort($found_files, SORT_NATURAL);
 
-                preg_replace_callback("/({$name})_(\d{1,})([a-zA-Z.]{1,})/", function ($matches) use ($file, $dir, $extension, $div) {
+                preg_replace_callback("/({$name})_(\d{1,})([a-zA-Z.]{1,})/", function ($matches) use ($file, $dir, $extension, &$div) {
                     $matches[2] = ((int)$matches[2]) + 1;
                     move_uploaded_file($file["tmp_name"], "{$dir}{$matches[1]}_{$matches[2]}{$extension}");
                     $image = Image::create([
@@ -126,7 +126,7 @@ class ImageController extends Controller
                 </tr>";
                 }, $found_files[count($found_files) - 1]);
             } else {
-                move_uploaded_file($file["tmp_name"], "{$name}_1{$extension}");
+                move_uploaded_file($file["tmp_name"], "{$dir}{$name}_1{$extension}");
                 $image = Image::create([
                     'name' =>  "{$name}_1{$extension}"
                 ]);
