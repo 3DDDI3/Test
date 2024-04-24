@@ -17,7 +17,7 @@ class ImageController extends Controller
 
         $extensions = array(
             ".xbm", ".tiff", ".jfif", ".icon", ".tiff", ".gif", ".svg", ".jpeg", ".svgz",
-            ".jpg,", ".webp", ".png", ".bmp", ".pjp", ".apng", ".pjpeg", ".avif"
+            ".jpg", ".webp", ".png", ".bmp", ".pjp", ".apng", ".pjpeg", ".avif"
         );
 
         $div = "";
@@ -31,6 +31,7 @@ class ImageController extends Controller
             preg_match("/([a-zA-ZА-Яа-яЁё0-9]{1,})([a-zA-Z0-9.]{1,})/", $name, $matches);
             $name = $matches[1];
             $extension = $matches[2];
+
             if (!array_search($extension, $extensions)) continue;
 
             $name = str_slug($name);

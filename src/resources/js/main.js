@@ -18,13 +18,13 @@ $(function () {
             let reader = new FileReader();
             reader.readAsDataURL(this.files[i]);
             reader.onload = function () {
-                $(".input-file-list").append(`<div><img src="${reader.result}"><span>${file.name}</span></div>`);
+                $(".input-file-list").append(`<div style="display: flex; flex-direction: column;"><img style="max-width: 40vw;" src="${reader.result}"><p>${file.name}</p></div>`);
             }
         }
 
         $.ajax({
             type: "POST",
-            url: "/api/image/upload",
+            url: "/api/images/upload",
             cache: false,
             contentType: false,
             processData: false,
@@ -48,7 +48,7 @@ $(function () {
             url: `/api/images/${id}`,
             dataType: "json",
             success: function (response) {
-                $(".modal-body").html(`<img src="${response.src}">`);
+                $(".modal-body").html(`<img style="width: inherit" src="${response.src}">`);
                 $(".modal-title").text(`Название - ${response.name}`);
             }
         });
@@ -60,11 +60,10 @@ $(function () {
 
         $.ajax({
             type: "GET",
-            url: `/api/createZip/${id}`,
+            url: `/api/zip/create/${id}`,
             dataType: "json",
             success: function (response) {
-                console.log(`/api/download/${id}`, response);
-                window.location.href = `/api/download/${id}`;
+                window.location.href = `/api/zip/download/${id}`;
             }
         });
     });

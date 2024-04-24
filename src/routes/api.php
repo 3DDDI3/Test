@@ -19,10 +19,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('image/upload', [ImageController::class, "upload"]);
-
-Route::get('/createZip/{id}', [ImageController::class, 'createZip']);
-Route::get('/download/{id}', [ImageController::class, 'download']);
+Route::prefix('zip')->group(function(){
+    Route::get('/create/{id}', [ImageController::class, 'createZip']);
+    Route::get('/download/{id}', [ImageController::class, 'download']);
+});
 
 Route::prefix('images')->group(function () {
     Route::get('/', [ImageController::class, 'show']);

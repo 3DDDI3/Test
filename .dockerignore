@@ -1,0 +1,11 @@
+data/
+# src/app/
+# src/bootstrap/
+# src/config/
+# src/database/
+# src/lang/
+src/node_modules/
+# src/public/
+# src/resources/
+# src/storage/
+# src/vendor/

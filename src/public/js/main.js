@@ -20,7 +20,7 @@ $(function () {
       var reader = new FileReader();
       reader.readAsDataURL(_this.files[i]);
       reader.onload = function () {
-        $(".input-file-list").append("<div><img src=\"".concat(reader.result, "\"><span>").concat(file.name, "</span></div>"));
+        $(".input-file-list").append("<div style=\"display: flex; flex-direction: column;\"><img style=\"max-width: 40vw;\" src=\"".concat(reader.result, "\"><p>").concat(file.name, "</p></div>"));
       };
     };
     for (var i = 0; i < this.files.length; i++) {
@@ -28,7 +28,7 @@ $(function () {
     }
     $.ajax({
       type: "POST",
-      url: "/api/image/upload",
+      url: "/api/images/upload",
       cache: false,
       contentType: false,
       processData: false,
@@ -48,7 +48,7 @@ $(function () {
       url: "/api/images/".concat(id),
       dataType: "json",
       success: function success(response) {
-        $(".modal-body").html("<img src=\"".concat(response.src, "\">"));
+        $(".modal-body").html("<img style=\"width: inherit\" src=\"".concat(response.src, "\">"));
         $(".modal-title").text("\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 - ".concat(response.name));
       }
     });
@@ -58,11 +58,10 @@ $(function () {
     var id = $(this).closest("tr").children()[0].getAttribute("data-id");
     $.ajax({
       type: "GET",
-      url: "/api/createZip/".concat(id),
+      url: "/api/zip/create/".concat(id),
       dataType: "json",
       success: function success(response) {
-        console.log("/api/download/".concat(id), response);
-        window.location.href = "/api/download/".concat(id);
+        window.location.href = "/api/zip/download/".concat(id);
       }
     });
   });

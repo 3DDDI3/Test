@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic as Image;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,5 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [MainController::class, 'index']);
 
 Route::get('/a', function () {
-    dd(1);
+    $img = Image::make(Storage::disk('images')->get("1.jpg"))->resize(request()->input('w'), null);
+    header('Content-Type:image/jpeg');
+    echo $img->encode('jpg');
 });
